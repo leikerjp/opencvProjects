@@ -172,8 +172,11 @@ void videoProcess(void)
 
 		if (centroidsL.size() > 0 && centroidsR.size() > 0)
 		{
-			disparity = xBf / (double(centroidsL[0].pt.y) - double(centroidsR[0].pt.y));
-			disparity /= 25.4; // convert millimeter to inches
+			disparity = xBf / (double(centroidsL[0].pt.x) - double(centroidsR[0].pt.x));
+			//std::cout << std::setw(10) << disparity << "\t";
+			//std::cout << std::setw(10) << double(centroidsL[0].pt.x) << "\t" << std::setw(10) << double(centroidsR[0].pt.x) << "\t";
+			//std::cout << std::setw(10) << double(centroidsL[0].pt.y) << "\t" << std::setw(10) << double(centroidsR[0].pt.y) << std::endl;
+			disparity /= 25.4; // Convert mm to inches
 			drawKeypoints(frameL, centroidsL, frameL, Scalar(0, 0, 255), DrawMatchesFlags::DRAW_RICH_KEYPOINTS);
 			drawKeypoints(frameR, centroidsR, frameR, Scalar(0, 0, 255), DrawMatchesFlags::DRAW_RICH_KEYPOINTS);
 			cv::putText(frameL,
